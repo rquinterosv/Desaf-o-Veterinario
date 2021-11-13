@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :pet_id %>
+    <%= form.select :pet_id, @pets %>
+  </div>
+
+  <div class="field">
     <%= form.label :weight %>
     <%= form.text_field :weight %>
   </div>

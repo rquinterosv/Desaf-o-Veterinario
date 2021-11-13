@@ -13,6 +13,7 @@ class PetHistoriesController < ApplicationController
   # GET /pet_histories/new
   def new
     @pet_history = PetHistory.new
+    @pets = Pet.pluck :name, :id
   end
 
   # GET /pet_histories/1/edit
@@ -28,7 +29,7 @@ class PetHistoriesController < ApplicationController
         format.html { redirect_to @pet_history, notice: "Pet history was successfully created." }
         format.json { render :show, status: :created, location: @pet_history }
       else
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new }
         format.json { render json: @pet_history.errors, status: :unprocessable_entity }
       end
     end
@@ -41,7 +42,7 @@ class PetHistoriesController < ApplicationController
         format.html { redirect_to @pet_history, notice: "Pet history was successfully updated." }
         format.json { render :show, status: :ok, location: @pet_history }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        format.html { render :edit }
         format.json { render json: @pet_history.errors, status: :unprocessable_entity }
       end
     end
@@ -64,6 +65,6 @@ class PetHistoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def pet_history_params
-      params.require(:pet_history).permit(:weight, :height, :description)
+      params.require(:pet_history).permit(:weight, :height, :description, :pet_id)
     end
 end
